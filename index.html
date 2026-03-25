@@ -1227,6 +1227,112 @@ ul { list-style: none; }
 }
 
 /* ═══════════════════════════════════════════
+   CLIENTS — LOGOS BAND
+   ═══════════════════════════════════════════ */
+
+.clients-section {
+  padding: 60px clamp(20px, 6vw, 80px);
+  border-bottom: 1px solid var(--grey-700);
+}
+
+.clients-title {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.clients-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(32px, 6vw, 72px);
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.client-logo {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: clamp(16px, 2vw, 20px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.client-logo:hover { color: var(--white); }
+
+/* ═══════════════════════════════════════════
+   TEAM
+   ═══════════════════════════════════════════ */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.team-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--grey-700);
+  padding: 32px;
+  transition: border-color 0.4s, transform 0.3s var(--ease-out);
+}
+
+.team-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-4px);
+}
+
+.team-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--grey-700);
+  border: 2px solid var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.team-name {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.team-role {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--grey-300);
+}
+
+/* ═══════════════════════════════════════════
    BACK TO TOP
    ═══════════════════════════════════════════ */
 
@@ -1306,6 +1412,9 @@ ul { list-style: none; }
   .footer { flex-direction: column; text-align: center; align-items: center; }
 
   .back-to-top { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { padding: 24px; }
 }
 
 @media (max-width: 480px) {
@@ -1621,6 +1730,42 @@ ul { list-style: none; }
           <span class="gallery-label">Goodies Event</span>
           <span class="gallery-line"></span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CLIENTS ═══════════ -->
+<div class="clients-section reveal">
+  <p class="clients-title">Ils nous font confiance</p>
+  <div class="clients-grid">
+    <span class="client-logo">CrossFit Grillen</span>
+    <span class="client-logo">CF67</span>
+    <span class="client-logo">Mjönnir Programming</span>
+    <span class="client-logo">CrossFit Colmar</span>
+    <span class="client-logo">CF Mulhouse</span>
+  </div>
+</div>
+
+<!-- ═══════════ TEAM ═══════════ -->
+<section class="section" id="equipe">
+  <div class="reveal">
+    <p class="section-label">L'équipe derrière MAJE CONCEPT</p>
+    <h2 class="section-title">DEUX PASSIONNÉS,<br>UN MÊME OBJECTIF</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-avatar">VJ</div>
+      <div class="team-info">
+        <span class="team-name">Vincent Jacquet</span>
+        <span class="team-role">Co-fondateur, direction créative & production</span>
+      </div>
+    </div>
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-avatar">MJ</div>
+      <div class="team-info">
+        <span class="team-name">Max Jentzsch</span>
+        <span class="team-role">Co-fondateur, relation clients & logistique</span>
       </div>
     </div>
   </div>
