@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAJE CONCEPT — Marquage textile CrossFit & événementiel | Alsace</title>
 <meta name="description" content="MAJE CONCEPT : marquage textile premium pour vos événements CrossFit en Alsace. T-shirts, hoodies, goodies, tatouages éphémères. Fabrication locale, livraison express.">
+<meta name="theme-color" content="#0A0A0A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 /* ═══════════════════════════════════════════
-   DESIGN SYSTEM — MAJE CONCEPT
+   DESIGN SYSTEM — MAJE CONCEPT v2
    ═══════════════════════════════════════════ */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,6 +20,7 @@
 :root {
   --black: #0A0A0A;
   --black-pure: #050505;
+  --grey-950: #111;
   --grey-900: #141414;
   --grey-800: #1A1A1A;
   --grey-700: #2A2A2A;
@@ -70,7 +72,80 @@ button { cursor: none; }
 img { max-width: 100%; display: block; }
 ul { list-style: none; }
 
-/* Custom Cursor */
+/* ═══════════════════════════════════════════
+   LOADER
+   ═══════════════════════════════════════════ */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  transition: opacity 0.6s var(--ease-out), visibility 0.6s;
+}
+
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-logo {
+  font-family: var(--font-display);
+  font-size: 48px;
+  letter-spacing: 6px;
+  color: var(--white);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s var(--ease-out) 0.2s forwards;
+}
+
+.loader-logo .mark { color: var(--orange); }
+
+.loader-bar {
+  width: 120px;
+  height: 2px;
+  background: var(--grey-700);
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.4s var(--ease-out) 0.4s forwards;
+}
+
+.loader-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  width: 0;
+  animation: loaderFill 1.2s var(--ease-out) 0.5s forwards;
+}
+
+@keyframes loaderFill {
+  to { width: 100%; }
+}
+
+/* ═══════════════════════════════════════════
+   NOISE TEXTURE OVERLAY
+   ═══════════════════════════════════════════ */
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+   ═══════════════════════════════════════════ */
+
 .cursor-dot {
   position: fixed;
   top: 0; left: 0;
@@ -104,8 +179,7 @@ ul { list-style: none; }
 /* Spotlight */
 .spotlight {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  inset: 0;
   pointer-events: none;
   z-index: 1;
   background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(255,69,0,0.04), transparent 60%);
@@ -128,7 +202,7 @@ ul { list-style: none; }
 }
 
 .nav.scrolled {
-  background: rgba(10, 10, 10, 0.85);
+  background: rgba(10, 10, 10, 0.9);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,69,0,0.1);
@@ -138,7 +212,6 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   line-height: 1;
-  gap: 0;
 }
 
 .nav-logo .logo-main {
@@ -162,6 +235,35 @@ ul { list-style: none; }
   color: var(--orange);
   margin-right: 2px;
 }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-300);
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--orange);
+  transition: width 0.3s var(--ease-out);
+}
+
+.nav-link:hover { color: var(--white); }
+.nav-link:hover::after { width: 100%; }
 
 .nav-cta {
   font-family: var(--font-ui);
@@ -192,6 +294,58 @@ ul { list-style: none; }
 .nav-cta:hover::before { transform: scaleX(1); transform-origin: left; }
 .nav-cta:hover { color: var(--black); }
 
+/* Hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--white);
+  transition: transform 0.3s var(--ease-out), opacity 0.3s;
+}
+
+.nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.nav-hamburger.active span:nth-child(2) { opacity: 0; }
+.nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.97);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+.mobile-menu.open { opacity: 1; visibility: visible; }
+
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 36px;
+  letter-spacing: 4px;
+  color: var(--white);
+  transition: color 0.3s;
+}
+
+.mobile-menu a:hover { color: var(--orange); }
+
 /* ═══════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════ */
@@ -204,6 +358,20 @@ ul { list-style: none; }
   justify-content: center;
   padding: calc(var(--nav-h) + 40px) clamp(20px, 6vw, 80px) 60px;
   overflow: hidden;
+}
+
+/* Background image */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+  filter: grayscale(40%);
 }
 
 /* Canvas particle background */
@@ -239,8 +407,9 @@ ul { list-style: none; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(255,69,0,0.06) 0%, transparent 60%),
-    linear-gradient(to top, var(--black) 0%, transparent 30%);
+    radial-gradient(ellipse at 20% 50%, rgba(255,69,0,0.08) 0%, transparent 60%),
+    linear-gradient(to top, var(--black) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, transparent 40%);
   z-index: 2;
   pointer-events: none;
 }
@@ -264,25 +433,24 @@ ul { list-style: none; }
   gap: 12px;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+  animation: fadeUp 0.8s var(--ease-out) 1.8s forwards;
 }
 
 .hero-tag::before {
   content: '';
-  width: 32px;
-  height: 1px;
+  width: 32px; height: 1px;
   background: var(--orange);
 }
 
 .hero-h1 {
   font-family: var(--font-display);
-  font-size: clamp(48px, 9vw, 120px);
-  line-height: 0.95;
+  font-size: clamp(52px, 10vw, 130px);
+  line-height: 0.92;
   letter-spacing: 2px;
   color: var(--white);
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   opacity: 0;
-  animation: heroReveal 1s var(--ease-out) 0.5s forwards;
+  animation: heroReveal 1s var(--ease-out) 2s forwards;
 }
 
 .hero-h1 .accent {
@@ -313,7 +481,7 @@ ul { list-style: none; }
   margin-bottom: 40px;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.8s var(--ease-out) 0.8s forwards;
+  animation: fadeUp 0.8s var(--ease-out) 2.3s forwards;
 }
 
 .hero-actions {
@@ -323,10 +491,10 @@ ul { list-style: none; }
   flex-wrap: wrap;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.8s var(--ease-out) 1s forwards;
+  animation: fadeUp 0.8s var(--ease-out) 2.5s forwards;
 }
 
-/* Primary CTA — Magnetic + Ripple */
+/* Primary CTA */
 .btn-primary {
   position: relative;
   display: inline-flex;
@@ -384,10 +552,8 @@ ul { list-style: none; }
 .link-secondary::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
   background: var(--orange);
   transition: width 0.4s var(--ease-out);
 }
@@ -398,8 +564,7 @@ ul { list-style: none; }
 /* Scroll indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 32px;
-  left: 50%;
+  bottom: 32px; left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
@@ -407,7 +572,7 @@ ul { list-style: none; }
   align-items: center;
   gap: 8px;
   opacity: 0;
-  animation: fadeUp 0.8s var(--ease-out) 1.4s forwards;
+  animation: fadeUp 0.8s var(--ease-out) 2.8s forwards;
 }
 
 .scroll-indicator span {
@@ -419,8 +584,7 @@ ul { list-style: none; }
 }
 
 .scroll-chevron {
-  width: 20px;
-  height: 20px;
+  width: 20px; height: 20px;
   border-right: 1.5px solid var(--orange);
   border-bottom: 1.5px solid var(--orange);
   transform: rotate(45deg);
@@ -477,23 +641,69 @@ ul { list-style: none; }
   margin-bottom: 48px;
 }
 
-/* Fade-in on scroll */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════════════
+   WHY US — USPs
+   ═══════════════════════════════════════════ */
+
+.usp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.usp-card {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--grey-700);
+  padding: 32px 24px;
+  text-align: center;
+  transition: border-color 0.4s, transform 0.4s var(--ease-out);
+}
+
+.usp-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-4px);
+}
+
+.usp-number {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.usp-label {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.usp-desc {
+  font-size: 13px;
+  color: var(--grey-300);
+  line-height: 1.5;
+}
 
 /* ═══════════════════════════════════════════
    SERVICES — BENTO GRID
@@ -510,7 +720,9 @@ ul { list-style: none; }
 
 .service-card {
   position: relative;
-  background: var(--grey-900);
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--grey-700);
   padding: clamp(28px, 3vw, 40px);
   overflow: hidden;
@@ -524,7 +736,7 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,69,0,0.06), transparent 60%);
+  background: linear-gradient(135deg, rgba(255,69,0,0.08), transparent 60%);
   opacity: 0;
   transition: opacity 0.4s;
 }
@@ -536,14 +748,11 @@ ul { list-style: none; }
 
 .service-card:hover::before { opacity: 1; }
 
-.service-card:nth-child(1) {
-  grid-column: span 2;
-}
+.service-card:nth-child(1) { grid-column: span 2; }
 
 .service-icon {
   width: 48px; height: 48px;
   margin-bottom: 20px;
-  color: var(--orange);
 }
 
 .service-icon svg {
@@ -578,7 +787,6 @@ ul { list-style: none; }
   overflow: hidden;
   border-top: 1px solid var(--grey-700);
   border-bottom: 1px solid var(--grey-700);
-  position: relative;
 }
 
 .ticker-track {
@@ -634,13 +842,11 @@ ul { list-style: none; }
   position: relative;
 }
 
-/* Connecting line */
 .steps-container::before {
   content: '';
   position: absolute;
   top: 48px;
-  left: 16.66%;
-  right: 16.66%;
+  left: 16.66%; right: 16.66%;
   height: 2px;
   background: var(--grey-700);
   z-index: 0;
@@ -649,8 +855,7 @@ ul { list-style: none; }
 .steps-container::after {
   content: '';
   position: absolute;
-  top: 48px;
-  left: 16.66%;
+  top: 48px; left: 16.66%;
   height: 2px;
   background: var(--orange);
   z-index: 1;
@@ -658,9 +863,7 @@ ul { list-style: none; }
   transition: width 1.5s var(--ease-out);
 }
 
-.steps-container.animated::after {
-  width: 66.66%;
-}
+.steps-container.animated::after { width: 66.66%; }
 
 .step {
   display: flex;
@@ -731,35 +934,38 @@ ul { list-style: none; }
 .gallery-item-inner {
   width: 100%;
   aspect-ratio: var(--ratio, 4/5);
-  background: var(--gradient, var(--grey-900));
   display: flex;
   align-items: flex-end;
   padding: 24px;
   position: relative;
   transition: transform 0.5s var(--ease-out);
+  background: var(--grey-900);
 }
 
 .gallery-item-inner img {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
+  transition: transform 0.6s var(--ease-out), filter 0.6s;
 }
 
-.gallery-item:hover .gallery-item-inner {
-  transform: scale(1.03);
+.gallery-item:hover .gallery-item-inner img {
+  transform: scale(1.06);
+  filter: brightness(0.5);
 }
 
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(255, 69, 0, 0.8);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   opacity: 0;
   transition: opacity 0.4s var(--ease-out);
+  z-index: 2;
 }
 
 .gallery-item:hover .gallery-overlay { opacity: 1; }
@@ -770,8 +976,21 @@ ul { list-style: none; }
   font-size: 18px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--white);
+  transform: translateY(12px);
+  transition: transform 0.4s var(--ease-out);
 }
+
+.gallery-item:hover .gallery-label { transform: translateY(0); }
+
+.gallery-line {
+  width: 40px; height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease-out) 0.1s;
+}
+
+.gallery-item:hover .gallery-line { transform: scaleX(1); }
 
 /* ═══════════════════════════════════════════
    CTA SECTION + FORM
@@ -792,7 +1011,6 @@ ul { list-style: none; }
   overflow: hidden;
 }
 
-/* Animated gradient border */
 .cta-wrapper::before {
   content: '';
   position: absolute;
@@ -979,7 +1197,7 @@ ul { list-style: none; }
 }
 
 /* ═══════════════════════════════════════════
-   COUNTER ANIMATION
+   STATS
    ═══════════════════════════════════════════ */
 
 .stats-bar {
@@ -990,9 +1208,7 @@ ul { list-style: none; }
   flex-wrap: wrap;
 }
 
-.stat {
-  text-align: center;
-}
+.stat { text-align: center; }
 
 .stat-number {
   font-family: var(--font-display);
@@ -1011,6 +1227,44 @@ ul { list-style: none; }
 }
 
 /* ═══════════════════════════════════════════
+   BACK TO TOP
+   ═══════════════════════════════════════════ */
+
+.back-to-top {
+  position: fixed;
+  bottom: 32px; right: 32px;
+  width: 48px; height: 48px;
+  background: var(--grey-900);
+  border: 1px solid var(--grey-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s var(--ease-out), border-color 0.3s, background 0.3s;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  border-color: var(--orange);
+  background: var(--orange-subtle);
+}
+
+.back-to-top svg {
+  width: 20px; height: 20px;
+  stroke: var(--white);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ═══════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════ */
 
@@ -1018,6 +1272,7 @@ ul { list-style: none; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .service-card:nth-child(1) { grid-column: span 2; }
   .gallery-grid { columns: 2; }
+  .usp-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1027,10 +1282,13 @@ ul { list-style: none; }
   body { cursor: auto; }
   a, button { cursor: pointer; }
 
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .services-grid { grid-template-columns: 1fr; }
   .service-card:nth-child(1) { grid-column: span 1; }
+
+  .usp-grid { grid-template-columns: 1fr 1fr; }
 
   .steps-container {
     grid-template-columns: 1fr;
@@ -1038,7 +1296,7 @@ ul { list-style: none; }
   }
   .steps-container::before, .steps-container::after { display: none; }
 
-  .gallery-grid { columns: 1; }
+  .gallery-grid { columns: 2; }
 
   .form-grid { grid-template-columns: 1fr; }
   .form-group.full, .btn-submit { grid-column: span 1; }
@@ -1047,16 +1305,27 @@ ul { list-style: none; }
 
   .footer { flex-direction: column; text-align: center; align-items: center; }
 
-  .nav-cta { display: none; }
+  .back-to-top { bottom: 20px; right: 20px; width: 44px; height: 44px; }
 }
 
 @media (max-width: 480px) {
   .stats-bar { gap: 24px; }
   .ticker-item { padding: 0 24px; font-size: 13px; }
+  .usp-grid { grid-template-columns: 1fr; }
+  .gallery-grid { columns: 1; }
 }
 </style>
 </head>
 <body>
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-logo"><span class="mark">/</span>MAJE CONCEPT</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- Noise -->
+<div class="noise" aria-hidden="true"></div>
 
 <!-- Custom Cursor -->
 <div class="cursor-dot" id="cursorDot"></div>
@@ -1067,15 +1336,34 @@ ul { list-style: none; }
 
 <!-- ═══════════ NAVIGATION ═══════════ -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-logo" aria-label="MAJE CONCEPT — Accueil">
+  <a href="#" class="nav-logo" aria-label="MAJE CONCEPT">
     <span class="logo-main"><span class="logo-mark">/</span>MAJE</span>
     <span class="logo-sub">Concept</span>
   </a>
-  <a href="#devis" class="nav-cta">Obtenir un devis</a>
+  <div class="nav-links">
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#pourquoi" class="nav-link">Pourquoi nous</a>
+    <a href="#realisations" class="nav-link">Réalisations</a>
+    <a href="#devis" class="nav-cta">Devis gratuit</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="mobile-link">SERVICES</a>
+  <a href="#pourquoi" class="mobile-link">POURQUOI NOUS</a>
+  <a href="#realisations" class="mobile-link">RÉALISATIONS</a>
+  <a href="#devis" class="mobile-link">DEVIS GRATUIT</a>
+</div>
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="images/crossfit/IMG_3105.jpeg" alt="" aria-hidden="true">
+  </div>
   <canvas id="particle-canvas" aria-hidden="true"></canvas>
   <div class="hero-content">
     <p class="hero-tag">Marquage textile premium en Alsace</p>
@@ -1101,6 +1389,36 @@ ul { list-style: none; }
   </div>
 </section>
 
+<!-- ═══════════ WHY US ═══════════ -->
+<section class="section" id="pourquoi">
+  <div class="reveal">
+    <p class="section-label">Pourquoi MAJE CONCEPT</p>
+    <h2 class="section-title">ON NE FAIT PAS DU TEXTILE.<br>ON ÉQUIPE DES ATHLÈTES.</h2>
+  </div>
+  <div class="usp-grid">
+    <div class="usp-card reveal reveal-delay-1">
+      <div class="usp-number">48H</div>
+      <div class="usp-label">Délai express</div>
+      <p class="usp-desc">Production locale en Alsace. Pas d'usine à l'autre bout du monde. Votre commande, traitée en priorité.</p>
+    </div>
+    <div class="usp-card reveal reveal-delay-2">
+      <div class="usp-number">100%</div>
+      <div class="usp-label">Sur mesure</div>
+      <p class="usp-desc">Chaque pièce conçue pour votre événement. Vos couleurs, votre logo, vos idées. On ne fait pas de catalogue standard.</p>
+    </div>
+    <div class="usp-card reveal reveal-delay-3">
+      <div class="usp-number">0</div>
+      <div class="usp-label">Minimum de commande</div>
+      <p class="usp-desc">10 t-shirts ou 500, même qualité, même attention. On s'adapte à la taille de votre box et de votre événement.</p>
+    </div>
+    <div class="usp-card reveal reveal-delay-4">
+      <div class="usp-number">A→Z</div>
+      <div class="usp-label">Clé en main</div>
+      <p class="usp-desc">Du brief à la livraison, on gère tout. Maquettes, prototypes, production, packaging. Vous, vous gérez votre comp.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ SERVICES ═══════════ -->
 <section class="section" id="services">
   <div class="reveal">
@@ -1108,7 +1426,6 @@ ul { list-style: none; }
     <h2 class="section-title">VOTRE BOX, VOTRE STYLE</h2>
   </div>
   <div class="services-grid">
-
     <div class="service-card reveal reveal-delay-1">
       <div class="service-icon">
         <svg viewBox="0 0 48 48"><path d="M8 14l16-8 16 8v4L24 26 8 18v-4z"/><path d="M8 18v16l16 8 16-8V18"/><path d="M24 26v16"/></svg>
@@ -1116,7 +1433,6 @@ ul { list-style: none; }
       <h3 class="service-name">T-shirts</h3>
       <p class="service-desc">Sérigraphie, DTF, broderie. Du coton 180g au technique respirant. Toute la gamme pour vos athlètes, staff et bénévoles.</p>
     </div>
-
     <div class="service-card reveal reveal-delay-2">
       <div class="service-icon">
         <svg viewBox="0 0 48 48"><path d="M12 8h24v6l-4 4v22H16V18l-4-4V8z"/><path d="M12 14h24"/></svg>
@@ -1124,7 +1440,6 @@ ul { list-style: none; }
       <h3 class="service-name">Hoodies</h3>
       <p class="service-desc">Capuche zippée ou classique. La pièce que vos membres porteront bien après l'événement.</p>
     </div>
-
     <div class="service-card reveal reveal-delay-3">
       <div class="service-icon">
         <svg viewBox="0 0 48 48"><ellipse cx="24" cy="18" rx="16" ry="10"/><path d="M8 18c0 8 7.2 14 16 14s16-6 16-14"/><path d="M14 10V6"/><path d="M34 10V6"/></svg>
@@ -1132,7 +1447,6 @@ ul { list-style: none; }
       <h3 class="service-name">Casquettes</h3>
       <p class="service-desc">Brodées, trucker, snapback. Logo en 3D ou flat. La touche finale de votre collection.</p>
     </div>
-
     <div class="service-card reveal reveal-delay-4">
       <div class="service-icon">
         <svg viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="24" rx="2"/><circle cx="24" cy="24" r="6"/><path d="M14 12V8h8"/></svg>
@@ -1140,7 +1454,6 @@ ul { list-style: none; }
       <h3 class="service-name">Goodies</h3>
       <p class="service-desc">Gourdes, shakers, wristbands, sacs. Des objets utiles, marqués à votre image, que les athlètes gardent.</p>
     </div>
-
     <div class="service-card reveal reveal-delay-5">
       <div class="service-icon">
         <svg viewBox="0 0 48 48"><path d="M16 8c-4 8 0 16 8 20s12 8 8 16"/><path d="M24 8c-4 8 0 16 8 20s12 8 8 16"/><circle cx="18" cy="20" r="3"/></svg>
@@ -1148,7 +1461,6 @@ ul { list-style: none; }
       <h3 class="service-name">Tatouages éphémères</h3>
       <p class="service-desc">Logo de votre comp sur la peau de chaque participant. L'effet WOW garanti sur les photos et réseaux.</p>
     </div>
-
     <div class="service-card reveal reveal-delay-5">
       <div class="service-icon">
         <svg viewBox="0 0 48 48"><path d="M6 24l18-16 18 16"/><path d="M10 22v18h28V22"/><rect x="18" y="30" width="12" height="10"/></svg>
@@ -1156,7 +1468,6 @@ ul { list-style: none; }
       <h3 class="service-name">Accessoires custom</h3>
       <p class="service-desc">Bandeaux, chaussettes, serviettes, bannières. On marque tout. Vraiment tout. Dites-nous votre idée.</p>
     </div>
-
   </div>
 </section>
 
@@ -1168,7 +1479,6 @@ ul { list-style: none; }
     <div class="ticker-item"><strong>Régionale Alsace 2024</strong> — Tatouages éphémères pour 800 participants</div>
     <div class="ticker-item"><strong>Box CrossFit Colmar</strong> — Collection complète personnalisée</div>
     <div class="ticker-item"><strong>MAJE CONCEPT × WOD Anniversaire Freiburg</strong> — 100% satisfait</div>
-    <!-- Duplicate for seamless loop -->
     <div class="ticker-item"><strong>CrossFit Strasbourg Open 2024</strong> — 450 athlètes équipés</div>
     <div class="ticker-item"><strong>MAJE CONCEPT × Box CF Mulhouse</strong> — Livraison en 5 jours</div>
     <div class="ticker-item"><strong>Régionale Alsace 2024</strong> — Tatouages éphémères pour 800 participants</div>
@@ -1183,7 +1493,6 @@ ul { list-style: none; }
     <p class="section-label">Comment ça marche</p>
     <h2 class="section-title">3 ÉTAPES. ZÉRO PRISE DE TÊTE.</h2>
   </div>
-
   <div class="steps-container reveal" id="stepsContainer">
     <div class="step">
       <div class="step-number">01</div>
@@ -1201,7 +1510,6 @@ ul { list-style: none; }
       <p class="step-desc">Alsace et alentours, livraison rapide. Votre événement est équipé dans les temps.</p>
     </div>
   </div>
-
   <div class="stats-bar reveal">
     <div class="stat">
       <div class="stat-number" data-target="2500">0</div>
@@ -1224,42 +1532,95 @@ ul { list-style: none; }
     <p class="section-label">Réalisations</p>
     <h2 class="section-title">DU CONCRET, PAS DU BLABLA</h2>
   </div>
-
   <div class="gallery-grid">
     <div class="gallery-item reveal reveal-delay-1" style="--ratio: 3/4;">
       <div class="gallery-item-inner">
-        <img src="images/crossfit/IMG_6175.JPG" alt="T-shirts CrossFit Grillen personnalisés sur cintres" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">T-shirts Custom</span></div>
+        <img src="images/crossfit/IMG_6175.JPG" alt="T-shirts CrossFit Grillen personnalisés" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">T-shirts Custom</span>
+          <span class="gallery-line"></span>
+        </div>
       </div>
     </div>
     <div class="gallery-item reveal reveal-delay-2" style="--ratio: 4/5;">
       <div class="gallery-item-inner">
         <img src="images/crossfit/IMG_3051.jpeg" alt="T-shirt bordeaux Back to Basics CF67" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">T-shirt CF67</span></div>
+        <div class="gallery-overlay">
+          <span class="gallery-label">T-shirt CF67</span>
+          <span class="gallery-line"></span>
+        </div>
       </div>
     </div>
     <div class="gallery-item reveal reveal-delay-3" style="--ratio: 1/1;">
       <div class="gallery-item-inner">
-        <img src="images/crossfit/IMG_3105.jpeg" alt="Bâche grand format phénix CF67 pour événement CrossFit" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">Bâche Événement</span></div>
+        <img src="images/crossfit/IMG_3105.jpeg" alt="Bâche phénix CF67 événement CrossFit" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">Bâche Événement</span>
+          <span class="gallery-line"></span>
+        </div>
       </div>
     </div>
     <div class="gallery-item reveal reveal-delay-1" style="--ratio: 3/4;">
       <div class="gallery-item-inner">
-        <img src="images/crossfit/IMG_8581.JPG" alt="Athlète portant un t-shirt personnalisé MAJE CONCEPT" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">T-shirt Personnalisé</span></div>
+        <img src="images/crossfit/IMG_8581.JPG" alt="Athlète portant un t-shirt personnalisé" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">T-shirt Personnalisé</span>
+          <span class="gallery-line"></span>
+        </div>
       </div>
     </div>
-    <div class="gallery-item reveal reveal-delay-2" style="--ratio: 5/6;">
+    <div class="gallery-item reveal reveal-delay-2" style="--ratio: 4/5;">
       <div class="gallery-item-inner">
-        <img src="images/crossfit/IMG_3381.jpeg" alt="Production complète lots compétition CrossFit tote bags et panneaux" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">Lots Compétition</span></div>
+        <img src="images/crossfit/IMG_9212.JPG" alt="Athlètes devant backdrop CrossFit Grillen Alsace" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">Ambiance Compétition</span>
+          <span class="gallery-line"></span>
+        </div>
       </div>
     </div>
-    <div class="gallery-item reveal reveal-delay-3" style="--ratio: 4/5;">
+    <div class="gallery-item reveal reveal-delay-3" style="--ratio: 5/6;">
       <div class="gallery-item-inner">
-        <img src="images/crossfit/IMG_9212.JPG" alt="Athlètes posant devant backdrop CrossFit Grillen Alsace 2024" loading="lazy">
-        <div class="gallery-overlay"><span class="gallery-label">Ambiance Compétition</span></div>
+        <img src="images/crossfit/IMG_3381.jpeg" alt="Production lots compétition tote bags et panneaux" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">Lots Compétition</span>
+          <span class="gallery-line"></span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1" style="--ratio: 3/4;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_3025.jpeg" alt="Panneaux podium CF67 Team Battle" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">Panneaux Podium</span>
+          <span class="gallery-line"></span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2" style="--ratio: 4/3;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_3045.jpeg" alt="Bannière CrossFit 67 dans une box" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">Bannière Box</span>
+          <span class="gallery-line"></span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-3" style="--ratio: 3/4;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_9214.JPG" alt="Athlète avec panneau de victoire CrossFit" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">Panneau Victoire</span>
+          <span class="gallery-line"></span>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1" style="--ratio: 5/6;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_3379.jpeg" alt="Goodies compétition panneaux et tote bags" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">Goodies Event</span>
+          <span class="gallery-line"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -1271,7 +1632,6 @@ ul { list-style: none; }
     <p class="section-label">Passez à l'action</p>
     <h2 class="cta-title">VOTRE PROCHAIN ÉVÉNEMENT<br><span style="color:var(--orange)">MÉRITE MIEUX</span></h2>
     <p class="cta-subtitle">Parlez-nous de votre projet. Compétition, Open, WOD anniversaire, team event : MAJE CONCEPT s'adapte. Devis sous 24h.</p>
-
     <form class="form-grid" id="contactForm" action="#" method="POST" novalidate>
       <div class="form-group">
         <label for="nom">Nom</label>
@@ -1318,12 +1678,23 @@ ul { list-style: none; }
   </div>
 </footer>
 
+<!-- Back to top -->
+<a href="#hero" class="back-to-top" id="backToTop" aria-label="Retour en haut">
+  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+
 <!-- ═══════════════════════════════════════════
      JAVASCRIPT
      ═══════════════════════════════════════════ -->
 <script>
 (function() {
   'use strict';
+
+  /* ─── Loader ─── */
+  const loader = document.getElementById('loader');
+  window.addEventListener('load', () => {
+    setTimeout(() => loader.classList.add('hidden'), 1800);
+  });
 
   /* ─── Custom Cursor ─── */
   const dot = document.getElementById('cursorDot');
@@ -1347,7 +1718,7 @@ ul { list-style: none; }
     }
     animateRing();
 
-    document.querySelectorAll('a, button, .service-card, .gallery-item').forEach(el => {
+    document.querySelectorAll('a, button, .service-card, .gallery-item, .usp-card').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
       el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
     });
@@ -1378,15 +1749,32 @@ ul { list-style: none; }
     });
   }
 
-  /* ─── Navbar scroll state ─── */
+  /* ─── Mobile Menu ─── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ─── Navbar scroll + Back to top ─── */
   const nav = document.getElementById('nav');
-  let lastScroll = 0;
+  const backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 80);
-    lastScroll = window.scrollY;
+    const s = window.scrollY;
+    nav.classList.toggle('scrolled', s > 80);
+    backToTop.classList.toggle('visible', s > 600);
   }, { passive: true });
 
-  /* ─── Scroll reveal (IntersectionObserver) ─── */
+  /* ─── Scroll reveal ─── */
   const reveals = document.querySelectorAll('.reveal');
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1434,7 +1822,7 @@ ul { list-style: none; }
   }, { threshold: 0.5 });
   counters.forEach(c => counterObs.observe(c));
 
-  /* ─── 3D Tilt on Service Cards ─── */
+  /* ─── 3D Tilt on Cards ─── */
   if (window.matchMedia('(pointer: fine)').matches) {
     document.querySelectorAll('.service-card').forEach(card => {
       card.addEventListener('mousemove', e => {
@@ -1453,7 +1841,6 @@ ul { list-style: none; }
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
   let particles = [];
-  let animFrame;
 
   function resizeCanvas() {
     canvas.width = canvas.offsetWidth;
@@ -1477,7 +1864,6 @@ ul { list-style: none; }
 
   function drawParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     particles.forEach((p, i) => {
       p.x += p.vx;
       p.y += p.vy;
@@ -1485,13 +1871,10 @@ ul { list-style: none; }
       if (p.x > canvas.width) p.x = 0;
       if (p.y < 0) p.y = canvas.height;
       if (p.y > canvas.height) p.y = 0;
-
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 69, 0, ${p.alpha})`;
       ctx.fill();
-
-      // Connect nearby particles
       for (let j = i + 1; j < particles.length; j++) {
         const dx = p.x - particles[j].x;
         const dy = p.y - particles[j].y;
@@ -1506,34 +1889,31 @@ ul { list-style: none; }
         }
       }
     });
-
-    animFrame = requestAnimationFrame(drawParticles);
+    requestAnimationFrame(drawParticles);
   }
 
-  // Respect reduced motion
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     resizeCanvas();
     createParticles();
     drawParticles();
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      createParticles();
-    });
+    window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
   }
 
-  /* ─── Hero parallax on scroll ─── */
+  /* ─── Hero parallax ─── */
   const heroContent = document.querySelector('.hero-content');
+  const heroBg = document.querySelector('.hero-bg');
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     window.addEventListener('scroll', () => {
       const s = window.scrollY;
       if (s < window.innerHeight) {
         heroContent.style.transform = `translateY(${s * 0.15}px)`;
         heroContent.style.opacity = 1 - (s / (window.innerHeight * 0.8));
+        if (heroBg) heroBg.style.transform = `translateY(${s * 0.3}px)`;
       }
     }, { passive: true });
   }
 
-  /* ─── Form handling ─── */
+  /* ─── Form ─── */
   const form = document.getElementById('contactForm');
   form.addEventListener('submit', e => {
     e.preventDefault();
