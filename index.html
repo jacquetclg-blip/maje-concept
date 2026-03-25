@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAJE CONCEPT — Marquage textile CrossFit & événementiel | Alsace</title>
+<meta name="description" content="MAJE CONCEPT : marquage textile premium pour vos événements CrossFit en Alsace. T-shirts, hoodies, goodies, tatouages éphémères. Fabrication locale, livraison express.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — MAJE CONCEPT
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0A0A0A;
+  --black-pure: #050505;
+  --grey-900: #141414;
+  --grey-800: #1A1A1A;
+  --grey-700: #2A2A2A;
+  --grey-600: #3A3A3A;
+  --grey-400: #6B6B6B;
+  --grey-300: #999;
+  --grey-100: #E0E0E0;
+  --white: #F5F5F5;
+  --orange: #FF4500;
+  --orange-dark: #CC3700;
+  --orange-light: #FF6A33;
+  --orange-glow: rgba(255, 69, 0, 0.4);
+  --orange-subtle: rgba(255, 69, 0, 0.08);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-ui: 'Barlow Condensed', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --nav-h: 72px;
+  --section-gap: clamp(80px, 12vw, 140px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+a { color: inherit; text-decoration: none; cursor: none; }
+button { cursor: none; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* Custom Cursor */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  transition: transform 0.1s var(--ease-out);
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  border: 1.5px solid var(--orange);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.25s var(--ease-out), width 0.3s var(--ease-out), height 0.3s var(--ease-out), border-color 0.3s;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-ring.hovering {
+  width: 64px; height: 64px;
+  border-color: var(--orange-light);
+  background: var(--orange-glow);
+}
+
+/* Spotlight */
+.spotlight {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(255,69,0,0.04), transparent 60%);
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 48px);
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,69,0,0.1);
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0;
+}
+
+.nav-logo .logo-main {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: var(--white);
+}
+
+.nav-logo .logo-sub {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--orange);
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.nav-logo .logo-mark {
+  display: inline-block;
+  color: var(--orange);
+  margin-right: 2px;
+}
+
+.nav-cta {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  background: transparent;
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out);
+  z-index: -1;
+}
+
+.nav-cta:hover::before { transform: scaleX(1); transform-origin: left; }
+.nav-cta:hover { color: var(--black); }
+
+/* ═══════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 40px) clamp(20px, 6vw, 80px) 60px;
+  overflow: hidden;
+}
+
+/* Canvas particle background */
+#particle-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Grid overlay */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,69,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,69,0,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 1;
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Gradient vignette */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(255,69,0,0.06) 0%, transparent 60%),
+    linear-gradient(to top, var(--black) 0%, transparent 30%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+}
+
+.hero-tag {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: clamp(12px, 1.4vw, 15px);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--orange);
+}
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 9vw, 120px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: heroReveal 1s var(--ease-out) 0.5s forwards;
+}
+
+.hero-h1 .accent {
+  color: var(--orange);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-h1:hover .glitch {
+  animation: glitch 0.4s steps(2) forwards;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 0 var(--orange), -2px 0 cyan; }
+  25% { text-shadow: -2px 2px var(--orange), 2px -2px cyan; transform: skewX(-2deg); }
+  50% { text-shadow: 1px -1px var(--orange), -1px 1px cyan; transform: skewX(1deg); }
+  75% { text-shadow: -1px 0 var(--orange), 1px 0 cyan; transform: skewX(-0.5deg); }
+  100% { text-shadow: none; transform: skewX(0); }
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  color: var(--grey-300);
+  max-width: 540px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 0.8s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out) 1s forwards;
+}
+
+/* Primary CTA — Magnetic + Ripple */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: clamp(14px, 1.6vw, 16px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 18px 36px;
+  background: var(--orange);
+  color: var(--black);
+  border: none;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 40px var(--orange-glow), 0 8px 32px rgba(255,69,0,0.3);
+}
+
+.btn-primary .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+.btn-primary svg {
+  width: 18px; height: 18px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.btn-primary:hover svg { transform: translateX(4px); }
+
+/* Secondary link */
+.link-secondary {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-300);
+  position: relative;
+  transition: color 0.3s;
+}
+
+.link-secondary::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--orange);
+  transition: width 0.4s var(--ease-out);
+}
+
+.link-secondary:hover { color: var(--white); }
+.link-secondary:hover::after { width: 100%; }
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out) 1.4s forwards;
+}
+
+.scroll-indicator span {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-400);
+}
+
+.scroll-chevron {
+  width: 20px;
+  height: 20px;
+  border-right: 1.5px solid var(--orange);
+  border-bottom: 1.5px solid var(--orange);
+  transform: rotate(45deg);
+  animation: scrollBounce 2s var(--ease-out) infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
+  50% { transform: rotate(45deg) translateY(8px); opacity: 0.3; }
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(40px); clip-path: inset(100% 0 0 0); }
+  to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION UTILITIES
+   ═══════════════════════════════════════════ */
+
+.section {
+  padding: var(--section-gap) clamp(20px, 6vw, 80px);
+  position: relative;
+}
+
+.section-label {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--orange);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 72px);
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 48px;
+}
+
+/* Fade-in on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════════════
+   SERVICES — BENTO GRID
+   ═══════════════════════════════════════════ */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-card {
+  position: relative;
+  background: var(--grey-900);
+  border: 1px solid var(--grey-700);
+  padding: clamp(28px, 3vw, 40px);
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out), border-color 0.4s, box-shadow 0.4s;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  cursor: none;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,69,0,0.06), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.service-card:hover {
+  border-color: var(--orange);
+  box-shadow: 0 0 40px rgba(255,69,0,0.08);
+}
+
+.service-card:hover::before { opacity: 1; }
+
+.service-card:nth-child(1) {
+  grid-column: span 2;
+}
+
+.service-icon {
+  width: 48px; height: 48px;
+  margin-bottom: 20px;
+  color: var(--orange);
+}
+
+.service-icon svg {
+  width: 100%; height: 100%;
+  stroke: var(--orange);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.service-name {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: clamp(18px, 2vw, 22px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.service-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--grey-300);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   SOCIAL PROOF TICKER
+   ═══════════════════════════════════════════ */
+
+.ticker-section {
+  padding: 48px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--grey-700);
+  border-bottom: 1px solid var(--grey-700);
+  position: relative;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 40s linear infinite;
+}
+
+.ticker-track:hover { animation-play-state: paused; }
+
+.ticker-item {
+  flex-shrink: 0;
+  padding: 0 48px;
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: clamp(14px, 1.8vw, 18px);
+  letter-spacing: 1px;
+  color: var(--grey-300);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.ticker-item::after {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ticker-item strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS — 3 STEPS
+   ═══════════════════════════════════════════ */
+
+.steps-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  position: relative;
+}
+
+/* Connecting line */
+.steps-container::before {
+  content: '';
+  position: absolute;
+  top: 48px;
+  left: 16.66%;
+  right: 16.66%;
+  height: 2px;
+  background: var(--grey-700);
+  z-index: 0;
+}
+
+.steps-container::after {
+  content: '';
+  position: absolute;
+  top: 48px;
+  left: 16.66%;
+  height: 2px;
+  background: var(--orange);
+  z-index: 1;
+  width: 0;
+  transition: width 1.5s var(--ease-out);
+}
+
+.steps-container.animated::after {
+  width: 66.66%;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.step-number {
+  width: 96px; height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: var(--orange);
+  background: var(--black);
+  border: 2px solid var(--grey-700);
+  border-radius: 50%;
+  margin-bottom: 24px;
+  transition: border-color 0.6s, box-shadow 0.6s;
+}
+
+.steps-container.animated .step-number {
+  border-color: var(--orange);
+  box-shadow: 0 0 30px rgba(255,69,0,0.15);
+}
+
+.step-title {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--grey-300);
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+/* ═══════════════════════════════════════════
+   GALLERY — MASONRY
+   ═══════════════════════════════════════════ */
+
+.gallery-grid {
+  columns: 3;
+  column-gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+
+.gallery-item-inner {
+  width: 100%;
+  aspect-ratio: var(--ratio, 4/5);
+  background: var(--gradient, var(--grey-900));
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  position: relative;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.gallery-item-inner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-item:hover .gallery-item-inner {
+  transform: scale(1.03);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 69, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+.gallery-label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+/* ═══════════════════════════════════════════
+   CTA SECTION + FORM
+   ═══════════════════════════════════════════ */
+
+.cta-section {
+  position: relative;
+  padding: var(--section-gap) clamp(20px, 6vw, 80px);
+}
+
+.cta-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding: clamp(40px, 6vw, 80px);
+  background: var(--grey-900);
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+/* Animated gradient border */
+.cta-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(from var(--angle, 0deg), var(--orange), transparent 40%, var(--orange-dark), transparent 70%, var(--orange));
+  z-index: -1;
+  animation: rotateBorder 4s linear infinite;
+}
+
+.cta-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--grey-900);
+  z-index: -1;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorder {
+  to { --angle: 360deg; }
+}
+
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.cta-subtitle {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--grey-300);
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full { grid-column: span 2; }
+
+.form-group label {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-400);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: var(--grey-800);
+  border: 1px solid var(--grey-600);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  -webkit-appearance: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255,69,0,0.15);
+}
+
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.form-group select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.btn-submit {
+  grid-column: span 2;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 18px 36px;
+  background: var(--orange);
+  color: var(--black);
+  border: none;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.2s var(--ease-out);
+}
+
+.btn-submit:hover {
+  box-shadow: 0 0 40px var(--orange-glow);
+  transform: translateY(-2px);
+}
+
+.btn-submit:active { transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+
+.footer {
+  border-top: 1px solid var(--grey-700);
+  padding: 48px clamp(20px, 6vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+
+.footer-tagline {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--grey-400);
+  text-transform: uppercase;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: var(--grey-400);
+}
+
+.footer-social {
+  width: 40px; height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--grey-600);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.footer-social:hover {
+  border-color: var(--orange);
+  background: var(--orange-subtle);
+}
+
+.footer-social svg {
+  width: 18px; height: 18px;
+  fill: var(--white);
+}
+
+/* ═══════════════════════════════════════════
+   COUNTER ANIMATION
+   ═══════════════════════════════════════════ */
+
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: clamp(32px, 6vw, 80px);
+  padding: 48px 20px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 64px);
+  color: var(--orange);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 1200px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .service-card:nth-child(1) { grid-column: span 2; }
+  .gallery-grid { columns: 2; }
+}
+
+@media (max-width: 768px) {
+  :root { --nav-h: 60px; }
+
+  .cursor-dot, .cursor-ring { display: none; }
+  body { cursor: auto; }
+  a, button { cursor: pointer; }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .service-card:nth-child(1) { grid-column: span 1; }
+
+  .steps-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .steps-container::before, .steps-container::after { display: none; }
+
+  .gallery-grid { columns: 1; }
+
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full, .btn-submit { grid-column: span 1; }
+
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+
+  .footer { flex-direction: column; text-align: center; align-items: center; }
+
+  .nav-cta { display: none; }
+}
+
+@media (max-width: 480px) {
+  .stats-bar { gap: 24px; }
+  .ticker-item { padding: 0 24px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Spotlight -->
+<div class="spotlight" id="spotlight"></div>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo" aria-label="MAJE CONCEPT — Accueil">
+    <span class="logo-main"><span class="logo-mark">/</span>MAJE</span>
+    <span class="logo-sub">Concept</span>
+  </a>
+  <a href="#devis" class="nav-cta">Obtenir un devis</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <p class="hero-tag">Marquage textile premium en Alsace</p>
+    <h1 class="hero-h1">
+      <span class="glitch">ÉQUIPEZ VOTRE</span><br>
+      <span class="glitch">ÉVÉNEMENT </span><span class="accent glitch">CROSSFIT</span>
+    </h1>
+    <p class="hero-sub">
+      T-shirts, hoodies, goodies : votre prochain Open, WOD anniversaire
+      ou compétition régionale en Alsace, habillé de A&nbsp;à&nbsp;Z. Fabrication locale, livraison express.
+    </p>
+    <div class="hero-actions">
+      <a href="#devis" class="btn-primary" id="btnDevis">
+        OBTENEZ UN DEVIS
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="#realisations" class="link-secondary">Voir nos réalisations</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-chevron"></div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="section" id="services">
+  <div class="reveal">
+    <p class="section-label">Ce qu'on fait</p>
+    <h2 class="section-title">VOTRE BOX, VOTRE STYLE</h2>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><path d="M8 14l16-8 16 8v4L24 26 8 18v-4z"/><path d="M8 18v16l16 8 16-8V18"/><path d="M24 26v16"/></svg>
+      </div>
+      <h3 class="service-name">T-shirts</h3>
+      <p class="service-desc">Sérigraphie, DTF, broderie. Du coton 180g au technique respirant. Toute la gamme pour vos athlètes, staff et bénévoles.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><path d="M12 8h24v6l-4 4v22H16V18l-4-4V8z"/><path d="M12 14h24"/></svg>
+      </div>
+      <h3 class="service-name">Hoodies</h3>
+      <p class="service-desc">Capuche zippée ou classique. La pièce que vos membres porteront bien après l'événement.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><ellipse cx="24" cy="18" rx="16" ry="10"/><path d="M8 18c0 8 7.2 14 16 14s16-6 16-14"/><path d="M14 10V6"/><path d="M34 10V6"/></svg>
+      </div>
+      <h3 class="service-name">Casquettes</h3>
+      <p class="service-desc">Brodées, trucker, snapback. Logo en 3D ou flat. La touche finale de votre collection.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-4">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="24" rx="2"/><circle cx="24" cy="24" r="6"/><path d="M14 12V8h8"/></svg>
+      </div>
+      <h3 class="service-name">Goodies</h3>
+      <p class="service-desc">Gourdes, shakers, wristbands, sacs. Des objets utiles, marqués à votre image, que les athlètes gardent.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-5">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><path d="M16 8c-4 8 0 16 8 20s12 8 8 16"/><path d="M24 8c-4 8 0 16 8 20s12 8 8 16"/><circle cx="18" cy="20" r="3"/></svg>
+      </div>
+      <h3 class="service-name">Tatouages éphémères</h3>
+      <p class="service-desc">Logo de votre comp sur la peau de chaque participant. L'effet WOW garanti sur les photos et réseaux.</p>
+    </div>
+
+    <div class="service-card reveal reveal-delay-5">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48"><path d="M6 24l18-16 18 16"/><path d="M10 22v18h28V22"/><rect x="18" y="30" width="12" height="10"/></svg>
+      </div>
+      <h3 class="service-name">Accessoires custom</h3>
+      <p class="service-desc">Bandeaux, chaussettes, serviettes, bannières. On marque tout. Vraiment tout. Dites-nous votre idée.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SOCIAL PROOF TICKER ═══════════ -->
+<div class="ticker-section" aria-label="Références clients">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item"><strong>CrossFit Strasbourg Open 2024</strong> — 450 athlètes équipés</div>
+    <div class="ticker-item"><strong>MAJE CONCEPT × Box CF Mulhouse</strong> — Livraison en 5 jours</div>
+    <div class="ticker-item"><strong>Régionale Alsace 2024</strong> — Tatouages éphémères pour 800 participants</div>
+    <div class="ticker-item"><strong>Box CrossFit Colmar</strong> — Collection complète personnalisée</div>
+    <div class="ticker-item"><strong>MAJE CONCEPT × WOD Anniversaire Freiburg</strong> — 100% satisfait</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item"><strong>CrossFit Strasbourg Open 2024</strong> — 450 athlètes équipés</div>
+    <div class="ticker-item"><strong>MAJE CONCEPT × Box CF Mulhouse</strong> — Livraison en 5 jours</div>
+    <div class="ticker-item"><strong>Régionale Alsace 2024</strong> — Tatouages éphémères pour 800 participants</div>
+    <div class="ticker-item"><strong>Box CrossFit Colmar</strong> — Collection complète personnalisée</div>
+    <div class="ticker-item"><strong>MAJE CONCEPT × WOD Anniversaire Freiburg</strong> — 100% satisfait</div>
+  </div>
+</div>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="section" id="processus">
+  <div class="reveal">
+    <p class="section-label">Comment ça marche</p>
+    <h2 class="section-title">3 ÉTAPES. ZÉRO PRISE DE TÊTE.</h2>
+  </div>
+
+  <div class="steps-container reveal" id="stepsContainer">
+    <div class="step">
+      <div class="step-number">01</div>
+      <h3 class="step-title">Envoyez votre brief</h3>
+      <p class="step-desc">Logo, quantités, date de l'événement. On prend le reste en main.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <h3 class="step-title">Fabrication locale</h3>
+      <p class="step-desc">Production en Alsace. Maquettes validées avant impression. Pas de mauvaise surprise.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <h3 class="step-title">Livraison express</h3>
+      <p class="step-desc">Alsace et alentours, livraison rapide. Votre événement est équipé dans les temps.</p>
+    </div>
+  </div>
+
+  <div class="stats-bar reveal">
+    <div class="stat">
+      <div class="stat-number" data-target="2500">0</div>
+      <div class="stat-label">Athlètes équipés</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="48">0</div>
+      <div class="stat-label">Heures de délai moyen</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="100">0</div>
+      <div class="stat-label">% Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section class="section" id="realisations">
+  <div class="reveal">
+    <p class="section-label">Réalisations</p>
+    <h2 class="section-title">DU CONCRET, PAS DU BLABLA</h2>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item reveal reveal-delay-1" style="--ratio: 3/4;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_6175.JPG" alt="T-shirts CrossFit Grillen personnalisés sur cintres" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">T-shirts Custom</span></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2" style="--ratio: 4/5;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_3051.jpeg" alt="T-shirt bordeaux Back to Basics CF67" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">T-shirt CF67</span></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-3" style="--ratio: 1/1;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_3105.jpeg" alt="Bâche grand format phénix CF67 pour événement CrossFit" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Bâche Événement</span></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1" style="--ratio: 3/4;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_8581.JPG" alt="Athlète portant un t-shirt personnalisé MAJE CONCEPT" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">T-shirt Personnalisé</span></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2" style="--ratio: 5/6;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_3381.jpeg" alt="Production complète lots compétition CrossFit tote bags et panneaux" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Lots Compétition</span></div>
+      </div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-3" style="--ratio: 4/5;">
+      <div class="gallery-item-inner">
+        <img src="images/crossfit/IMG_9212.JPG" alt="Athlètes posant devant backdrop CrossFit Grillen Alsace 2024" loading="lazy">
+        <div class="gallery-overlay"><span class="gallery-label">Ambiance Compétition</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA + FORM ═══════════ -->
+<section class="cta-section" id="devis">
+  <div class="cta-wrapper reveal">
+    <p class="section-label">Passez à l'action</p>
+    <h2 class="cta-title">VOTRE PROCHAIN ÉVÉNEMENT<br><span style="color:var(--orange)">MÉRITE MIEUX</span></h2>
+    <p class="cta-subtitle">Parlez-nous de votre projet. Compétition, Open, WOD anniversaire, team event : MAJE CONCEPT s'adapte. Devis sous 24h.</p>
+
+    <form class="form-grid" id="contactForm" action="#" method="POST" novalidate>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Date de l'événement</label>
+        <input type="date" id="date" name="date">
+      </div>
+      <div class="form-group">
+        <label for="quantite">Quantité estimée</label>
+        <select id="quantite" name="quantite">
+          <option value="">Sélectionnez</option>
+          <option value="10-50">10 — 50 pièces</option>
+          <option value="50-100">50 — 100 pièces</option>
+          <option value="100-300">100 — 300 pièces</option>
+          <option value="300+">300+ pièces</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="message">Votre projet</label>
+        <textarea id="message" name="message" placeholder="Décrivez votre événement, vos besoins en textile, vos délais..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">LANCEZ VOTRE COMMANDE</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-left">
+    <span class="footer-brand"><span style="color:var(--orange)">/</span>MAJE CONCEPT</span>
+    <span class="footer-tagline">Marquage textile premium — Alsace</span>
+  </div>
+  <div class="footer-right">
+    <span class="footer-copy">&copy; 2025 MAJE CONCEPT. Tous droits réservés.</span>
+    <a href="#" class="footer-social" aria-label="Instagram MAJE CONCEPT">
+      <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ─── Custom Cursor ─── */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  const spotlight = document.getElementById('spotlight');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+      spotlight.style.setProperty('--mx', mx + 'px');
+      spotlight.style.setProperty('--my', my + 'px');
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.transform = `translate(${rx - 20}px, ${ry - 20}px)`;
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .service-card, .gallery-item').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+    });
+  }
+
+  /* ─── Magnetic CTA Button ─── */
+  const btnDevis = document.getElementById('btnDevis');
+  if (btnDevis && window.matchMedia('(pointer: fine)').matches) {
+    btnDevis.addEventListener('mousemove', e => {
+      const rect = btnDevis.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btnDevis.style.transform = `translate(${x * 0.2}px, ${y * 0.3}px)`;
+    });
+    btnDevis.addEventListener('mouseleave', () => {
+      btnDevis.style.transform = 'translate(0, 0)';
+    });
+    btnDevis.addEventListener('click', e => {
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      const rect = btnDevis.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      btnDevis.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+  }
+
+  /* ─── Navbar scroll state ─── */
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+    lastScroll = window.scrollY;
+  }, { passive: true });
+
+  /* ─── Scroll reveal (IntersectionObserver) ─── */
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => revealObs.observe(el));
+
+  /* ─── Steps animation ─── */
+  const stepsContainer = document.getElementById('stepsContainer');
+  const stepsObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+        stepsObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  if (stepsContainer) stepsObs.observe(stepsContainer);
+
+  /* ─── Counter animation ─── */
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        let current = 0;
+        const increment = target / 60;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            el.textContent = target.toLocaleString('fr-FR') + (target === 100 ? '%' : '+');
+            clearInterval(timer);
+          } else {
+            el.textContent = Math.floor(current).toLocaleString('fr-FR');
+          }
+        }, 25);
+        counterObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObs.observe(c));
+
+  /* ─── 3D Tilt on Service Cards ─── */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(800px) rotateY(0) rotateX(0) scale(1)';
+      });
+    });
+  }
+
+  /* ─── Particle Canvas ─── */
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animFrame;
+
+  function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function createParticles() {
+    particles = [];
+    const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 2 + 0.5,
+        alpha: Math.random() * 0.5 + 0.1
+      });
+    }
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 69, 0, ${p.alpha})`;
+      ctx.fill();
+
+      // Connect nearby particles
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = p.x - particles[j].x;
+        const dy = p.y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(255, 69, 0, ${0.08 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    });
+
+    animFrame = requestAnimationFrame(drawParticles);
+  }
+
+  // Respect reduced motion
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    resizeCanvas();
+    createParticles();
+    drawParticles();
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles();
+    });
+  }
+
+  /* ─── Hero parallax on scroll ─── */
+  const heroContent = document.querySelector('.hero-content');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.addEventListener('scroll', () => {
+      const s = window.scrollY;
+      if (s < window.innerHeight) {
+        heroContent.style.transform = `translateY(${s * 0.15}px)`;
+        heroContent.style.opacity = 1 - (s / (window.innerHeight * 0.8));
+      }
+    }, { passive: true });
+  }
+
+  /* ─── Form handling ─── */
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'ENVOYÉ !';
+    btn.style.background = '#22c55e';
+    setTimeout(() => {
+      btn.textContent = 'LANCEZ VOTRE COMMANDE';
+      btn.style.background = '';
+      form.reset();
+    }, 2500);
+  });
+
+})();
+</script>
+</body>
+</html>
