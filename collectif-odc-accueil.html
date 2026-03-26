@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collectif Or du Commun — Bien plus d'un collectif !</title>
+<meta name="description" content="Tiers-lieu associatif à Andolsheim (68). Communauté, espaces de coworking, formations et événements pour construire votre parcours professionnel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   RESET & VARIABLES
+   ══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --or: #FFCA00;
+  --bleu: #015E7C;
+  --bleu-dark: #0A3F52;
+  --orange: #E57A44;
+  --fond-gris: #F5F7FA;
+  --texte-2: #666666;
+  --blanc: #FFFFFF;
+  --gradient-or: linear-gradient(135deg, #FFCA00 0%, #E57A44 100%);
+  --gradient-bleu: linear-gradient(135deg, #015E7C 0%, #0A3F52 100%);
+  --radius-card: 16px;
+  --radius-btn: 10px;
+  --radius-img: 20px;
+  --shadow-soft: 0 2px 16px rgba(1,94,124,0.08);
+  --shadow-hover: 0 12px 40px rgba(1,94,124,0.18);
+  --shadow-gold: 0 4px 20px rgba(255,202,0,0.25);
+  --border-accent: 4px solid #FFCA00;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --section-pad: 96px 0;
+  --section-pad-m: 56px 0;
+  --max-width: 1200px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--bleu-dark);
+  background: var(--blanc);
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ══════════════════════════════════════════
+   TYPOGRAPHY
+   ══════════════════════════════════════════ */
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--bleu);
+  line-height: 1.2;
+}
+h1 { font-size: 58px; }
+h2 { font-size: 42px; }
+h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--bleu);
+}
+
+.label {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--or);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ══════════════════════════════════════════
+   SKIP TO CONTENT
+   ══════════════════════════════════════════ */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--or);
+  color: var(--bleu);
+  padding: 12px 24px;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  z-index: 10000;
+  transition: top 0.3s;
+}
+.skip-link:focus { top: 16px; }
+
+/* ══════════════════════════════════════════
+   BUTTONS
+   ══════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-btn);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+.btn-primary {
+  background: var(--or);
+  color: var(--bleu);
+  border-color: var(--or);
+}
+.btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-gold);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--bleu);
+  border-color: var(--bleu);
+}
+.btn-outline:hover {
+  background: var(--bleu);
+  color: var(--blanc);
+  transform: scale(1.03);
+}
+.btn-white-outline {
+  background: transparent;
+  color: var(--blanc);
+  border-color: rgba(255,255,255,0.3);
+}
+.btn-white-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--or);
+  color: var(--or);
+}
+
+/* ══════════════════════════════════════════
+   SECTION 0 : NAVIGATION STICKY
+   ══════════════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: var(--transition);
+  background: transparent;
+}
+.navbar.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+  padding: 10px 0;
+}
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-logo svg { width: 40px; height: 46px; flex-shrink: 0; }
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--bleu);
+  line-height: 1.2;
+}
+.nav-logo-text span { display: block; font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: var(--texte-2); letter-spacing: 0.02em; }
+
+.nav-eu {
+  width: 48px;
+  height: auto;
+  margin-left: 12px;
+  opacity: 0.7;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bleu-dark);
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--or);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--bleu); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  padding: 10px 22px;
+  background: var(--or);
+  color: var(--bleu) !important;
+  border-radius: var(--radius-btn);
+  font-weight: 600 !important;
+  transition: var(--transition);
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  width: 24px; height: 2px;
+  background: var(--bleu-dark);
+  transition: var(--transition);
+  display: block;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav overlay */
+.mobile-nav {
+  position: fixed;
+  top: 0; right: -100%;
+  width: 320px;
+  max-width: 85vw;
+  height: 100vh;
+  background: var(--blanc);
+  z-index: 999;
+  padding: 80px 32px 40px;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 32px rgba(0,0,0,0.12);
+  overflow-y: auto;
+}
+.mobile-nav.open { right: 0; }
+.mobile-nav a {
+  display: block;
+  padding: 16px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--bleu-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: color 0.3s;
+}
+.mobile-nav a:hover { color: var(--bleu); }
+.mobile-nav .btn { margin-top: 24px; width: 100%; justify-content: center; }
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.mobile-overlay.open { opacity: 1; pointer-events: all; }
+
+/* ══════════════════════════════════════════
+   SECTION 1 : HERO
+   ══════════════════════════════════════════ */
+.hero {
+  padding: 140px 0 96px;
+  background: #FAFCFE;
+  position: relative;
+  overflow: hidden;
+}
+.hero-blob {
+  position: absolute;
+  top: -120px; left: -180px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,202,0,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+.hero-confetti {
+  position: absolute;
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-confetti span {
+  position: absolute;
+  opacity: 0.08;
+}
+.hero-confetti .c1 { top: 15%; right: 8%; width: 80px; height: 80px; background: var(--or); border-radius: 50%; }
+.hero-confetti .c2 { top: 60%; left: 3%; width: 40px; height: 40px; background: var(--orange); transform: rotate(45deg); }
+.hero-confetti .c3 { bottom: 20%; right: 35%; width: 20px; height: 20px; background: var(--bleu); border-radius: 50%; }
+.hero-confetti .c4 { top: 25%; left: 40%; width: 60px; height: 3px; background: var(--or); transform: rotate(-15deg); }
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-content { padding-right: 24px; }
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,202,0,0.15);
+  color: var(--bleu);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 18px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+}
+.hero h1 { margin-bottom: 20px; }
+.hero h1 .highlight {
+  position: relative;
+  display: inline-block;
+}
+.hero h1 .highlight svg {
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 100%; height: 14px;
+}
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--texte-2);
+  margin-bottom: 16px;
+}
+.hero-desc {
+  font-size: 16px;
+  color: var(--texte-2);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* Hero image */
+.hero-visual { position: relative; }
+.hero-image-wrapper {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(1,94,124,0.15);
+}
+.hero-image-wrapper img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+.hero-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(10,63,82,0.15) 100%);
+  pointer-events: none;
+}
+
+/* Stats badges floating */
+.hero-stat {
+  position: absolute;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 14px 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+.hero-stat-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.hero-stat-text strong { display: block; font-size: 18px; color: var(--bleu); }
+.hero-stat-text span { font-size: 12px; color: var(--texte-2); }
+.hero-stat-1 { bottom: -20px; left: -20px; }
+.hero-stat-1 .hero-stat-icon { background: rgba(255,202,0,0.15); }
+.hero-stat-2 { top: 20px; right: -16px; }
+.hero-stat-2 .hero-stat-icon { background: rgba(1,94,124,0.1); }
+
+/* ══════════════════════════════════════════
+   SCROLL ANIMATIONS
+   ══════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+.reveal-d5 { transition-delay: 0.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none !important; }
+  .btn:hover { transform: none; }
+}
+
+/* ══════════════════════════════════════════
+   SECTION 2 : BANDEAU ACTUALITÉS
+   ══════════════════════════════════════════ */
+.actus-band {
+  background: var(--or);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+  gap: 0;
+}
+.actus-band:hover .marquee-track { animation-play-state: paused; }
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 32px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--bleu);
+}
+.marquee-sep {
+  color: var(--bleu);
+  opacity: 0.4;
+  font-size: 10px;
+  padding: 0 8px;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ══════════════════════════════════════════
+   SECTION 3 : CHIFFRES CLÉS
+   ══════════════════════════════════════════ */
+.stats-section {
+  padding: var(--section-pad);
+  background: var(--fond-gris);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  text-align: center;
+}
+.stat-item {
+  padding: 24px;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 1px; height: 48px;
+  background: rgba(1,94,124,0.1);
+}
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 56px;
+  color: var(--bleu);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--texte-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.stat-underline {
+  width: 32px; height: 3px;
+  background: var(--or);
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+
+/* ══════════════════════════════════════════
+   SECTION 4 : ADN DU COLLECTIF
+   ══════════════════════════════════════════ */
+.adn-section {
+  padding: var(--section-pad);
+  background: var(--blanc);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.section-header h2 { margin-top: 4px; }
+
+.adn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.adn-card {
+  background: var(--blanc);
+  border-radius: var(--radius-card);
+  padding: 36px 28px;
+  border-left: 4px solid var(--or);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+}
+.adn-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-left-color: var(--orange);
+}
+.adn-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: rgba(255,202,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+.adn-card h3 { margin-bottom: 10px; }
+.adn-card p { color: var(--texte-2); font-size: 15px; line-height: 1.6; }
+
+/* ══════════════════════════════════════════
+   SECTION 5 : J'AI BESOIN DE...
+   ══════════════════════════════════════════ */
+.besoins-section {
+  padding: var(--section-pad);
+  background: var(--fond-gris);
+}
+.besoins-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.besoin-card {
+  background: var(--blanc);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.besoin-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bleu);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+.besoin-card:hover::before { opacity: 1; }
+.besoin-card > * { position: relative; z-index: 1; }
+.besoin-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(255,202,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.besoin-card:hover .besoin-icon { background: rgba(255,202,0,0.2); }
+.besoin-text { flex: 1; }
+.besoin-text h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bleu-dark);
+  line-height: 1.4;
+  transition: color 0.3s;
+}
+.besoin-card:hover .besoin-text h4 { color: var(--blanc); }
+.besoin-arrow {
+  font-size: 18px;
+  color: var(--or);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: var(--transition);
+  align-self: center;
+}
+.besoin-card:hover .besoin-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ══════════════════════════════════════════
+   SECTION 6 : BEFORE-WEEK
+   ══════════════════════════════════════════ */
+.bw-section {
+  padding: var(--section-pad);
+  background: var(--blanc);
+  position: relative;
+  overflow: hidden;
+}
+.bw-hex {
+  position: absolute;
+  right: -60px; bottom: -40px;
+  width: 260px; height: 260px;
+  opacity: 0.04;
+  z-index: 0;
+}
+.bw-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.bw-image {
+  border-radius: var(--radius-img);
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(1,94,124,0.12);
+  position: relative;
+}
+.bw-image img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+.bw-video-thumb {
+  position: relative;
+  border-radius: var(--radius-img);
+  overflow: hidden;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+.bw-video-thumb img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: brightness(0.85);
+  transition: filter 0.3s;
+}
+.bw-video-thumb:hover img { filter: brightness(0.7); }
+.play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 64px; height: 64px;
+  background: var(--or);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(255,202,0,0.4);
+  transition: var(--transition);
+}
+.play-btn svg { width: 24px; height: 24px; margin-left: 3px; }
+.bw-video-thumb:hover .play-btn { transform: translate(-50%,-50%) scale(1.1); }
+
+.bw-badge {
+  display: inline-block;
+  background: var(--or);
+  color: var(--bleu);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.bw-content h2 { margin-bottom: 16px; }
+.bw-content > p { color: var(--texte-2); margin-bottom: 24px; line-height: 1.7; }
+.bw-pills {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.bw-pill {
+  background: var(--fond-gris);
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bleu-dark);
+}
+
+/* ══════════════════════════════════════════
+   SECTION 7 : FORMATIONS
+   ══════════════════════════════════════════ */
+.formations-section {
+  padding: var(--section-pad);
+  background: var(--fond-gris);
+}
+.formations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.formation-card {
+  background: var(--blanc);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+  position: relative;
+}
+.formation-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+.formation-bar { height: 4px; width: 100%; }
+.formation-body { padding: 28px 24px; }
+.formation-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.formation-body h3 { font-size: 19px; margin-bottom: 6px; }
+.formation-body .formation-sub {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: block;
+}
+.formation-body p { font-size: 14px; color: var(--texte-2); line-height: 1.6; margin-bottom: 16px; }
+.formation-link {
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.3s;
+}
+.formation-link:hover { gap: 10px; }
+
+/* Formation accent colors */
+.fc-orange .formation-bar { background: var(--orange); }
+.fc-orange .formation-icon { background: rgba(229,122,68,0.12); }
+.fc-orange .formation-sub { color: var(--orange); }
+.fc-orange .formation-link { color: var(--orange); }
+
+.fc-bleu .formation-bar { background: var(--bleu); }
+.fc-bleu .formation-icon { background: rgba(1,94,124,0.1); }
+.fc-bleu .formation-sub { color: var(--bleu); }
+.fc-bleu .formation-link { color: var(--bleu); }
+
+.fc-or .formation-bar { background: var(--or); }
+.fc-or .formation-icon { background: rgba(255,202,0,0.15); }
+.fc-or .formation-sub { color: #B89700; }
+.fc-or .formation-link { color: #B89700; }
+
+.fc-dark .formation-bar { background: var(--bleu-dark); }
+.fc-dark .formation-icon { background: rgba(10,63,82,0.1); }
+.fc-dark .formation-sub { color: var(--bleu-dark); }
+.fc-dark .formation-link { color: var(--bleu-dark); }
+
+.formations-cta { text-align: center; }
+
+/* ══════════════════════════════════════════
+   SECTION 8 : VIDÉO
+   ══════════════════════════════════════════ */
+.video-section {
+  padding: var(--section-pad);
+  background: linear-gradient(180deg, var(--blanc) 0%, var(--fond-gris) 100%);
+}
+.video-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.video-wrapper h2 { margin-bottom: 8px; }
+.video-wrapper > p { color: var(--texte-2); margin-bottom: 36px; }
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(1,94,124,0.15);
+}
+.video-embed iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.video-poster {
+  position: absolute;
+  inset: 0;
+  background: var(--bleu-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.4s;
+  z-index: 2;
+}
+.video-poster img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+.video-poster .play-btn {
+  position: absolute;
+  width: 80px; height: 80px;
+}
+.video-poster.hidden { opacity: 0; pointer-events: none; }
+
+/* ══════════════════════════════════════════
+   SECTION 9 : PRESSE
+   ══════════════════════════════════════════ */
+.presse-section {
+  padding: var(--section-pad);
+  background: var(--fond-gris);
+}
+.presse-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.presse-card {
+  background: var(--blanc);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  border-left: var(--border-accent);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+  display: flex;
+  gap: 20px;
+}
+.presse-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.presse-source-badge {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.presse-source-badge.radio { background: rgba(229,122,68,0.12); }
+.presse-source-badge.journal { background: rgba(1,94,124,0.1); }
+.presse-source-badge.mag { background: rgba(255,202,0,0.12); }
+.presse-source-badge.podcast { background: rgba(10,63,82,0.1); }
+
+.presse-info { flex: 1; }
+.presse-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.presse-source {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--bleu);
+}
+.presse-date {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texte-2);
+}
+.presse-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--bleu-dark);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.presse-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bleu);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.3s, color 0.3s;
+}
+.presse-link:hover { gap: 10px; color: var(--orange); }
+.presse-link svg { width: 14px; height: 14px; }
+
+/* ══════════════════════════════════════════
+   SECTION 10 : LOCALISATION
+   ══════════════════════════════════════════ */
+.location-section {
+  padding: var(--section-pad);
+  background: var(--blanc);
+}
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.location-content h2 { margin-bottom: 20px; }
+.location-address {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.location-address-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--texte-2);
+}
+.location-address-item svg {
+  width: 20px; height: 20px;
+  flex-shrink: 0;
+  color: var(--bleu);
+}
+.location-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.location-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--bleu-dark);
+}
+.location-feature-dot {
+  width: 8px; height: 8px;
+  background: var(--or);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.location-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.location-map {
+  border-radius: var(--radius-img);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  height: 400px;
+}
+.location-map iframe {
+  width: 100%; height: 100%;
+  border: 0;
+  filter: saturate(0.8) contrast(1.05);
+}
+
+/* ══════════════════════════════════════════
+   SECTION 11 : FOOTER
+   ══════════════════════════════════════════ */
+.site-footer {
+  background: var(--bleu-dark);
+  padding: 64px 0 0;
+  color: rgba(255,255,255,0.75);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-brand .nav-logo-text { color: var(--blanc); margin-bottom: 16px; }
+.footer-brand .nav-logo-text span { color: rgba(255,255,255,0.5); }
+.footer-brand p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 280px;
+}
+.footer-socials { display: flex; gap: 12px; }
+.footer-social {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.footer-social:hover { background: var(--or); }
+.footer-social svg { width: 18px; height: 18px; fill: var(--blanc); transition: fill 0.3s; }
+.footer-social:hover svg { fill: var(--bleu-dark); }
+
+.footer-col h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--blanc);
+  margin-bottom: 20px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  padding: 5px 0;
+  color: rgba(255,255,255,0.65);
+  transition: color 0.3s;
+  position: relative;
+}
+.footer-col a:hover { color: var(--or); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,202,0,0.15);
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copy { font-size: 13px; }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.3s; }
+.footer-legal a:hover { color: var(--or); }
+.footer-badges { display: flex; gap: 16px; align-items: center; }
+.footer-badges img { height: 36px; opacity: 0.7; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  h1 { font-size: 42px; }
+  h2 { font-size: 34px; }
+  .hero .container { grid-template-columns: 1fr; gap: 40px; }
+  .hero-content { padding-right: 0; text-align: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-desc { margin: 0 auto 32px; }
+  .hero-visual { max-width: 540px; margin: 0 auto; }
+  .hero-stat-2 { right: 0; }
+
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2)::after { display: none; }
+
+  .adn-grid { grid-template-columns: repeat(2, 1fr); }
+  .adn-grid .adn-card:last-child { grid-column: span 2; max-width: 400px; margin: 0 auto; }
+
+  .besoins-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .bw-grid { grid-template-columns: 1fr; gap: 40px; }
+  .bw-image { max-width: 540px; margin: 0 auto; }
+
+  .formations-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .presse-grid { grid-template-columns: 1fr; }
+
+  .location-grid { grid-template-columns: 1fr; gap: 40px; }
+  .location-map { height: 300px; }
+
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: 34px; }
+  h2 { font-size: 28px; }
+  .stat-number { font-size: 40px; }
+  .hero { padding: 120px 0 56px; }
+  .hero-subtitle { font-size: 17px; }
+
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .stat-item::after { display: none; }
+
+  .adn-grid { grid-template-columns: 1fr; }
+  .adn-grid .adn-card:last-child { grid-column: auto; max-width: none; }
+
+  .besoins-grid { grid-template-columns: 1fr; }
+
+  .formations-grid { grid-template-columns: 1fr; }
+
+  .location-features { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .hero-stat-1 { bottom: -16px; left: 8px; }
+  .hero-stat-2 { top: 12px; right: 8px; }
+  .hero-stat { padding: 10px 14px; }
+  .hero-stat-text strong { font-size: 15px; }
+  .hero-stat-text span { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Skip to content -->
+<a href="#main" class="skip-link">Aller au contenu principal</a>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 0 : NAVIGATION STICKY                      -->
+<!-- ═══════════════════════════════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Navigation principale">
+  <div class="container">
+    <a href="/" class="nav-logo" aria-label="Collectif Or du Commun - Accueil">
+      <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0L38.66 11v24L20 46 1.34 35V11L20 0z" fill="#FFCA00"/>
+        <text x="20" y="28" text-anchor="middle" font-family="Playfair Display,serif" font-weight="700" font-size="18" fill="#015E7C">Or</text>
+      </svg>
+      <div class="nav-logo-text">
+        Collectif Or du Commun
+        <span>Tiers-lieu Andolsheim</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#hero">Accueil</a>
+      <a href="#formations">Formations</a>
+      <a href="#besoins">Prestations</a>
+      <a href="#localisation">Nos Locaux</a>
+      <a href="#before-week">Agenda</a>
+      <a href="#localisation" class="nav-cta">Nous rejoindre</a>
+    </div>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-overlay" aria-hidden="true"></div>
+<div class="mobile-nav" role="dialog" aria-label="Menu mobile">
+  <a href="#hero">Accueil</a>
+  <a href="#formations">Formations</a>
+  <a href="#besoins">Prestations</a>
+  <a href="#localisation">Nos Locaux</a>
+  <a href="#before-week">Agenda</a>
+  <a href="#localisation">Contact</a>
+  <a href="#" class="btn btn-primary" style="margin-top:24px">Nous rejoindre</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 1 : HERO                                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<main id="main">
+<section id="hero" class="hero" aria-label="Accueil">
+  <div class="hero-blob"></div>
+  <div class="hero-confetti">
+    <span class="c1"></span>
+    <span class="c2"></span>
+    <span class="c3"></span>
+    <span class="c4"></span>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge reveal">Tiers-lieu &middot; Andolsheim (68)</div>
+      <h1 class="reveal reveal-d1">
+        Bien plus d'un <span class="highlight">collectif<svg viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M0 10 Q50 0 100 8 T200 6" stroke="#FFCA00" stroke-width="4" fill="none" stroke-linecap="round">
+          <animate attributeName="d" values="M0 12 Q50 14 100 12 T200 12;M0 10 Q50 0 100 8 T200 6;M0 10 Q50 0 100 8 T200 6" dur="1.2s" fill="freeze"/>
+        </path></svg></span>&nbsp;!
+      </h1>
+      <p class="hero-subtitle reveal reveal-d2">Une communaute, des espaces, des evenements et formations.</p>
+      <p class="hero-desc reveal reveal-d3">Un espace partage, des programmes engages et un accompagnement humain pour construire et developper le parcours professionnel de chacune et chacun.</p>
+      <div class="hero-ctas reveal reveal-d4">
+        <a href="#" class="btn btn-primary">Nous rejoindre &rarr;</a>
+        <a href="#localisation" class="btn btn-outline">Decouvrir le lieu</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal reveal-d3">
+      <div class="hero-image-wrapper">
+        <img src="https://collectiforducommun.org/wp-content/uploads/2026/03/odc-before-week.jpg"
+             alt="Une Before-Week au Collectif Or du Commun - participants echangeant autour d'un cafe"
+             onerror="this.style.background='linear-gradient(135deg,#015E7C,#0A3F52)';this.style.minHeight='420px';this.alt='Photo du Collectif';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 420%22><rect fill=%22%23015E7C%22 width=%22600%22 height=%22420%22/><text x=%22300%22 y=%22210%22 text-anchor=%22middle%22 fill=%22%23FFCA00%22 font-size=%2232%22 font-family=%22sans-serif%22>Collectif Or du Commun</text></svg>'">
+      </div>
+      <div class="hero-stat hero-stat-1">
+        <div class="hero-stat-icon">&#x1F465;</div>
+        <div class="hero-stat-text">
+          <strong>200+</strong>
+          <span>adherents</span>
+        </div>
+      </div>
+      <div class="hero-stat hero-stat-2">
+        <div class="hero-stat-icon">&#x1F4C5;</div>
+        <div class="hero-stat-text">
+          <strong>Depuis 2018</strong>
+          <span>6 ans d'existence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 2 : BANDEAU ACTUALITÉS                     -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="actus-band" aria-label="Actualites">
+  <div class="marquee-track" aria-live="off">
+    <span class="marquee-item">&#x1F4C5; Prochaine Before-Week : lundi 7 avril 9h&ndash;11h</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F680; ORizon LAB &mdash; Candidatez avant le 15 avril</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F3C5; Qualiopi certifie &middot; OF reconnu</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F4C5; Prochaine Before-Week : lundi 7 avril 9h&ndash;11h</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F680; ORizon LAB &mdash; Candidatez avant le 15 avril</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F3C5; Qualiopi certifie &middot; OF reconnu</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F4C5; Prochaine Before-Week : lundi 7 avril 9h&ndash;11h</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F680; ORizon LAB &mdash; Candidatez avant le 15 avril</span>
+    <span class="marquee-sep">&#x25C6;</span>
+    <span class="marquee-item">&#x1F3C5; Qualiopi certifie &middot; OF reconnu</span>
+    <span class="marquee-sep">&#x25C6;</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 3 : CHIFFRES CLÉS                          -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="stats-section" aria-label="Chiffres cles">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number" data-target="200" data-suffix="+">0</div>
+        <div class="stat-label">adherents actifs</div>
+        <div class="stat-underline"></div>
+      </div>
+      <div class="stat-item reveal reveal-d1">
+        <div class="stat-number" data-target="6" data-suffix=" ans">0</div>
+        <div class="stat-label">d'existence</div>
+        <div class="stat-underline"></div>
+      </div>
+      <div class="stat-item reveal reveal-d2">
+        <div class="stat-number" data-target="5" data-suffix="">0</div>
+        <div class="stat-label">programmes de formation</div>
+        <div class="stat-underline"></div>
+      </div>
+      <div class="stat-item reveal reveal-d3">
+        <div class="stat-number" data-target="2" data-suffix="">0</div>
+        <div class="stat-label">salles equipees</div>
+        <div class="stat-underline"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 4 : ADN DU COLLECTIF                       -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="adn-section" aria-label="Notre ADN">
+  <div class="container">
+    <div class="section-header">
+      <span class="label reveal">Notre ADN</span>
+      <h2 class="reveal reveal-d1">Ce qui nous definit</h2>
+    </div>
+    <div class="adn-grid">
+      <div class="adn-card reveal">
+        <div class="adn-icon">&#x1F91D;</div>
+        <h3>Accompagner</h3>
+        <p>Soutenir les parcours professionnels en transition avec bienveillance et engagement.</p>
+      </div>
+      <div class="adn-card reveal reveal-d1">
+        <div class="adn-icon">&#x1F3E1;</div>
+        <h3>Accueillir</h3>
+        <p>Creer un lieu vivant ou chacun se sent chez soi pour travailler et grandir.</p>
+      </div>
+      <div class="adn-card reveal reveal-d2">
+        <div class="adn-icon">&#x1F680;</div>
+        <h3>Encourager</h3>
+        <p>Cultiver l'intelligence collective et l'engagement de tous au quotidien.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 5 : J'AI BESOIN DE...                      -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="besoins" class="besoins-section" aria-label="J'ai besoin de">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="reveal">J'ai besoin de...</h2>
+    </div>
+    <div class="besoins-grid">
+      <a href="#" class="besoin-card reveal">
+        <div class="besoin-icon">&#x1F91D;</div>
+        <div class="besoin-text"><h4>M'entourer d'une communaute qui me ressemble</h4></div>
+        <span class="besoin-arrow">&rarr;</span>
+      </a>
+      <a href="#formations" class="besoin-card reveal reveal-d1">
+        <div class="besoin-icon">&#x1F4BC;</div>
+        <div class="besoin-text"><h4>Affirmer ma posture professionnelle</h4></div>
+        <span class="besoin-arrow">&rarr;</span>
+      </a>
+      <a href="#localisation" class="besoin-card reveal reveal-d2">
+        <div class="besoin-icon">&#x1F3E2;</div>
+        <div class="besoin-text"><h4>Travailler hors de chez moi dans de bonnes conditions</h4></div>
+        <span class="besoin-arrow">&rarr;</span>
+      </a>
+      <a href="#localisation" class="besoin-card reveal reveal-d1">
+        <div class="besoin-icon">&#x1F465;</div>
+        <div class="besoin-text"><h4>Accueillir clients dans un espace pro</h4></div>
+        <span class="besoin-arrow">&rarr;</span>
+      </a>
+      <a href="#localisation" class="besoin-card reveal reveal-d2">
+        <div class="besoin-icon">&#x1F393;</div>
+        <div class="besoin-text"><h4>Organiser mes ateliers et trouver mon public</h4></div>
+        <span class="besoin-arrow">&rarr;</span>
+      </a>
+      <a href="#formations" class="besoin-card reveal reveal-d3">
+        <div class="besoin-icon">&#x1F4DA;</div>
+        <div class="besoin-text"><h4>Me former avec des experts du terrain</h4></div>
+        <span class="besoin-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 6 : BEFORE-WEEK                            -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="before-week" class="bw-section" aria-label="Les Before-Weeks">
+  <!-- Hexagone filigrane -->
+  <svg class="bw-hex" viewBox="0 0 200 230" fill="none"><path d="M100 0L195 55v120L100 230 5 175V55L100 0z" fill="#FFCA00"/></svg>
+  <div class="container">
+    <div class="bw-grid">
+      <div class="bw-image reveal">
+        <img src="https://collectiforducommun.org/wp-content/uploads/2026/03/odc-before-week.jpg"
+             alt="Participants d'une Before-Week au Collectif Or du Commun"
+             onerror="this.style.background='var(--bleu)';this.style.minHeight='360px';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 360%22><rect fill=%22%23015E7C%22 width=%22600%22 height=%22360%22/><text x=%22300%22 y=%22180%22 text-anchor=%22middle%22 fill=%22%23FFCA00%22 font-size=%2224%22 font-family=%22sans-serif%22>Before-Week</text></svg>'">
+        <div class="bw-video-thumb" data-video="KbtJAP6CkEU" role="button" tabindex="0" aria-label="Lire la video de presentation des Before-Weeks">
+          <img src="https://img.youtube.com/vi/KbtJAP6CkEU/maxresdefault.jpg" alt="Video Before-Week"
+               onerror="this.src='https://img.youtube.com/vi/KbtJAP6CkEU/hqdefault.jpg'">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="#015E7C"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="bw-content">
+        <div class="bw-badge reveal">Chaque lundi 9h&ndash;11h</div>
+        <h2 class="reveal reveal-d1">Les Before-Weeks</h2>
+        <p class="reveal reveal-d2">Des temps collectifs hebdomadaires ouverts a toutes et tous pour se ressourcer, rencontrer, apprendre, tester, partager.</p>
+        <div class="bw-pills reveal reveal-d3">
+          <span class="bw-pill">&#x1F3A4; Experts invites</span>
+          <span class="bw-pill">&#x1F310; Reseau pro</span>
+          <span class="bw-pill">&#x2615; Convivial</span>
+        </div>
+        <a href="#" class="btn btn-primary reveal reveal-d4">Voir les prochaines dates &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 7 : FORMATIONS                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="formations" class="formations-section" aria-label="Nos programmes de formation">
+  <div class="container">
+    <div class="section-header">
+      <span class="label reveal">Nos Programmes</span>
+      <h2 class="reveal reveal-d1">Des formations pour renforcer<br>ma capacite d'agir</h2>
+    </div>
+    <div class="formations-grid">
+      <!-- Potenti'Elles -->
+      <div class="formation-card fc-orange reveal">
+        <div class="formation-bar"></div>
+        <div class="formation-body">
+          <div class="formation-icon">&#x1F469;&#x200D;&#x1F4BC;</div>
+          <h3>Les Potenti'Elles</h3>
+          <span class="formation-sub">Femmes en transition &middot; 6 semaines</span>
+          <p>Un programme d'accompagnement collectif pour les femmes qui souhaitent reprendre confiance et clarifier leur trajectoire professionnelle.</p>
+          <a href="#" class="formation-link">En savoir plus &rarr;</a>
+        </div>
+      </div>
+      <!-- ORizon LAB -->
+      <div class="formation-card fc-bleu reveal reveal-d1">
+        <div class="formation-bar"></div>
+        <div class="formation-body">
+          <div class="formation-icon">&#x1F680;</div>
+          <h3>ORizon LAB</h3>
+          <span class="formation-sub">20&ndash;28 ans &middot; Projet pro</span>
+          <p>Un laboratoire d'experimentation pour les jeunes adultes qui veulent construire un projet professionnel concret et lance.</p>
+          <a href="#" class="formation-link">En savoir plus &rarr;</a>
+        </div>
+      </div>
+      <!-- L'Campus -->
+      <div class="formation-card fc-or reveal reveal-d2">
+        <div class="formation-bar"></div>
+        <div class="formation-body">
+          <div class="formation-icon">&#x1F4DA;</div>
+          <h3>L'Campus</h3>
+          <span class="formation-sub">Entrepreneuriat feminin</span>
+          <p>Une formation intensive dediee aux femmes porteuses de projet entrepreneurial, avec mentorat personnalise.</p>
+          <a href="#" class="formation-link">En savoir plus &rarr;</a>
+        </div>
+      </div>
+      <!-- S'entrApprendre -->
+      <div class="formation-card fc-dark reveal">
+        <div class="formation-bar"></div>
+        <div class="formation-body">
+          <div class="formation-icon">&#x1F91D;</div>
+          <h3>S'entrApprendre</h3>
+          <span class="formation-sub">Formateurs-entrepreneurs &middot; 12 modules</span>
+          <p>Un parcours pour les formateurs independants qui veulent structurer leur activite et toucher leur public cible.</p>
+          <a href="#" class="formation-link">En savoir plus &rarr;</a>
+        </div>
+      </div>
+      <!-- Coup de pouce -->
+      <div class="formation-card fc-orange reveal reveal-d1">
+        <div class="formation-bar"></div>
+        <div class="formation-body">
+          <div class="formation-icon">&#x26A1;</div>
+          <h3>Coup de pouce</h3>
+          <span class="formation-sub">Co-developpement &middot; Resolution collective</span>
+          <p>Des sessions de co-developpement professionnel pour debloquer des situations et avancer grace au collectif.</p>
+          <a href="#" class="formation-link">En savoir plus &rarr;</a>
+        </div>
+      </div>
+      <!-- Ateliers adhérents -->
+      <div class="formation-card fc-bleu reveal reveal-d2">
+        <div class="formation-bar"></div>
+        <div class="formation-body">
+          <div class="formation-icon">&#x2728;</div>
+          <h3>Ateliers adherents</h3>
+          <span class="formation-sub">Expertises du reseau</span>
+          <p>Des ateliers animes par les membres du collectif pour partager competences et savoir-faire du terrain.</p>
+          <a href="#" class="formation-link">En savoir plus &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="formations-cta reveal">
+      <a href="#" class="btn btn-outline">Voir tous les programmes</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 8 : VIDÉO DE PRÉSENTATION                  -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="video-section" aria-label="Video de presentation">
+  <div class="container">
+    <div class="video-wrapper">
+      <h2 class="reveal">Le Collectif en video</h2>
+      <p class="reveal reveal-d1">Decouvrez nos espaces et notre communaute en 2 minutes</p>
+      <div class="video-embed reveal reveal-d2">
+        <div class="video-poster" id="videoPoster" role="button" tabindex="0" aria-label="Lancer la video de presentation">
+          <img src="https://img.youtube.com/vi/STkYRmIXJ78/maxresdefault.jpg" alt="Apercu video"
+               onerror="this.src='https://img.youtube.com/vi/STkYRmIXJ78/hqdefault.jpg'">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="#015E7C"/></svg>
+          </div>
+        </div>
+        <iframe id="videoIframe" src="" title="Presentation du Collectif Or du Commun" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 9 : PRESSE                                 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="presse-section" aria-label="Presse">
+  <div class="container">
+    <div class="section-header">
+      <span class="label reveal">Ils parlent de nous</span>
+      <h2 class="reveal reveal-d1">On parle du Collectif</h2>
+    </div>
+    <div class="presse-grid">
+      <div class="presse-card reveal">
+        <div class="presse-source-badge radio">&#x1F4FB;</div>
+        <div class="presse-info">
+          <div class="presse-meta">
+            <span class="presse-source">France Inter</span>
+            <span class="presse-date">Avr. 2024</span>
+          </div>
+          <div class="presse-title">Carnets de campagne : interview de la fondatrice du Collectif Or du Commun</div>
+          <a href="https://www.radiofrance.fr/franceinter" class="presse-link" target="_blank" rel="noopener">
+            Ecouter l'emission &rarr;
+            <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="presse-card reveal reveal-d1">
+        <div class="presse-source-badge journal">&#x1F4F0;</div>
+        <div class="presse-info">
+          <div class="presse-meta">
+            <span class="presse-source">Maxi Flash Colmar</span>
+            <span class="presse-date">Jan. 2026</span>
+          </div>
+          <div class="presse-title">Andolsheim : le Collectif Or du Commun, un tiers-lieu qui rassemble</div>
+          <a href="https://colmar.maxi-flash.com" class="presse-link" target="_blank" rel="noopener">
+            Lire l'article &rarr;
+            <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="presse-card reveal reveal-d1">
+        <div class="presse-source-badge mag">&#x1F4D6;</div>
+        <div class="presse-info">
+          <div class="presse-meta">
+            <span class="presse-source">Le Periscope</span>
+            <span class="presse-date">Dec. 2024</span>
+          </div>
+          <div class="presse-title">Un tiers-lieu a Andolsheim : Or du Commun souffle sa 6eme bougie</div>
+          <a href="https://le-periscope.info" class="presse-link" target="_blank" rel="noopener">
+            Lire l'article &rarr;
+            <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="presse-card reveal reveal-d2">
+        <div class="presse-source-badge podcast">&#x1F399;&#xFE0F;</div>
+        <div class="presse-info">
+          <div class="presse-meta">
+            <span class="presse-source">Podcast Theodora</span>
+            <span class="presse-date">2024</span>
+          </div>
+          <div class="presse-title">Interview exclusive de Marina Patroucheva, fondatrice du Collectif</div>
+          <a href="https://smartlink.ausha.co/theodora" class="presse-link" target="_blank" rel="noopener">
+            Ecouter le podcast &rarr;
+            <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 10 : VENIR NOUS RENCONTRER                 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="localisation" class="location-section" aria-label="Nous trouver">
+  <div class="container">
+    <div class="location-grid">
+      <div class="location-content">
+        <h2 class="reveal">Venir nous rencontrer</h2>
+        <div class="location-address reveal reveal-d1">
+          <div class="location-address-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" fill="currentColor"/></svg>
+            Andolsheim, Haut-Rhin (68) &mdash; a cote de Colmar
+          </div>
+          <div class="location-address-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm11 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM5 11l1.5-4.5h11L19 11H5z" fill="currentColor"/></svg>
+            Parking gratuit &middot; Bus TRACE &middot; Covoiturage evenements
+          </div>
+          <div class="location-address-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="currentColor"/></svg>
+            Ouvert du lundi au vendredi
+          </div>
+        </div>
+        <div class="location-features reveal reveal-d2">
+          <div class="location-feature">
+            <span class="location-feature-dot"></span>
+            2 salles modulables et equipees
+          </div>
+          <div class="location-feature">
+            <span class="location-feature-dot"></span>
+            Postes de coworking conviviaux
+          </div>
+          <div class="location-feature">
+            <span class="location-feature-dot"></span>
+            Bureau individuel privatisable
+          </div>
+          <div class="location-feature">
+            <span class="location-feature-dot"></span>
+            Cuisine partagee et jardin
+          </div>
+        </div>
+        <div class="location-ctas reveal reveal-d3">
+          <a href="#" class="btn btn-primary">Nous contacter</a>
+          <a href="#" class="btn btn-outline">Voir les tarifs</a>
+        </div>
+      </div>
+      <div class="location-map reveal reveal-d2">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2663.5!2d7.408!3d48.072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zAndolsheim!5e0!3m2!1sfr!2sfr!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte - Collectif Or du Commun, Andolsheim"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 11 : FOOTER                                -->
+<!-- ═══════════════════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:16px">
+          <svg viewBox="0 0 40 46" fill="none" width="36" height="42">
+            <path d="M20 0L38.66 11v24L20 46 1.34 35V11L20 0z" fill="#FFCA00"/>
+            <text x="20" y="28" text-anchor="middle" font-family="Playfair Display,serif" font-weight="700" font-size="18" fill="#015E7C">Or</text>
+          </svg>
+          <div class="nav-logo-text">
+            Collectif Or du Commun
+            <span>Bien plus d'un collectif !</span>
+          </div>
+        </div>
+        <p>Un espace partage, des programmes engages et un accompagnement humain a Andolsheim.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2m-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5M12 7a5 5 0 110 10 5 5 0 010-10m0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#hero">Accueil</a>
+        <a href="#formations">Formations</a>
+        <a href="#besoins">Prestations</a>
+        <a href="#localisation">Nos Locaux</a>
+        <a href="#before-week">Agenda</a>
+        <a href="#localisation">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Nos Programmes</h4>
+        <a href="#">Les Potenti'Elles</a>
+        <a href="#">ORizon LAB</a>
+        <a href="#">L'Campus</a>
+        <a href="#">S'entrApprendre</a>
+        <a href="#">Coup de pouce</a>
+        <a href="#">Ateliers adherents</a>
+      </div>
+      <div class="footer-col">
+        <h4>Infos pratiques</h4>
+        <a href="#">Andolsheim (68)</a>
+        <a href="#">Lun. au Ven.</a>
+        <a href="#">Voir sur Google Maps</a>
+        <a href="#">Tarifs et adhesion</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2025 Collectif Or du Commun. Tous droits reserves.</span>
+      <div class="footer-legal">
+        <a href="#">Mentions legales</a>
+        <a href="#">CGU</a>
+        <a href="#">Politique de confidentialite</a>
+      </div>
+      <div class="footer-badges">
+        <span style="font-size:11px;opacity:0.5;padding:6px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;">Qualiopi</span>
+        <span style="font-size:11px;opacity:0.5;padding:6px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;">Co-finance UE</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT                                          -->
+<!-- ═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ─── Sticky Navbar ───
+  var navbar = document.querySelector('.navbar');
+  var scrollThreshold = 40;
+  function onScroll() {
+    if (window.scrollY > scrollThreshold) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ─── Mobile Menu ───
+  var hamburger = document.querySelector('.hamburger');
+  var mobileNav = document.querySelector('.mobile-nav');
+  var overlay = document.querySelector('.mobile-overlay');
+  function toggleMenu() {
+    var open = mobileNav.classList.toggle('open');
+    overlay.classList.toggle('open', open);
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+  mobileNav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      if (mobileNav.classList.contains('open')) toggleMenu();
+    });
+  });
+
+  // ─── Smooth Scroll ───
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        var offset = 80;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ─── Scroll Reveal ───
+  var reveals = document.querySelectorAll('.reveal');
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(function(el) { revealObserver.observe(el); });
+
+  // ─── Count Up Stats ───
+  var statNumbers = document.querySelectorAll('.stat-number[data-target]');
+  var statsAnimated = false;
+  var statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !statsAnimated) {
+        statsAnimated = true;
+        animateCounters();
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  if (statNumbers.length) {
+    statsObserver.observe(statNumbers[0].closest('.stats-section'));
+  }
+
+  function animateCounters() {
+    statNumbers.forEach(function(el) {
+      var target = parseInt(el.dataset.target);
+      var suffix = el.dataset.suffix || '';
+      var duration = 1500;
+      var start = performance.now();
+      function step(now) {
+        var progress = Math.min((now - start) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        var value = Math.floor(ease * target);
+        el.textContent = value + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target + suffix;
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // ─── Video Poster Click ───
+  var poster = document.getElementById('videoPoster');
+  var iframe = document.getElementById('videoIframe');
+  if (poster && iframe) {
+    function playVideo() {
+      iframe.src = 'https://www.youtube.com/embed/STkYRmIXJ78?autoplay=1&rel=0';
+      poster.classList.add('hidden');
+    }
+    poster.addEventListener('click', playVideo);
+    poster.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playVideo(); }
+    });
+  }
+
+  // ─── Before-Week Video Thumb ───
+  var bwThumb = document.querySelector('.bw-video-thumb[data-video]');
+  if (bwThumb) {
+    function openBWVideo() {
+      var id = bwThumb.dataset.video;
+      bwThumb.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" style="width:100%;height:200px;border:0;border-radius:var(--radius-img);" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
+    }
+    bwThumb.addEventListener('click', openBWVideo);
+    bwThumb.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBWVideo(); }
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
